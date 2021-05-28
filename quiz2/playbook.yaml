@@ -1,0 +1,27 @@
+---
+- name: Quiz2 Playbook
+  hosts: target
+
+  tasks:
+  - name: Change motd
+    lineinfile:
+      path: '/etc/motd'
+      line: 'Ansible Managed by 1812502'
+      state: present
+
+  - name: Create a user with your github user name and password AnsibleManaged
+    user:
+      name: jmbotona-tip
+      state: present
+      password: AnsibleManaged
+
+  - name: Should be passwordless sudoer user
+    lineinfile:
+      path: '/etc/sudoers'
+      line: 'jmbotona-tip ALL=(ALL) NOPASSWD: ALL'
+      state: present
+
+  - name: Create a group named sysad2
+    group:
+      name: sysad2
+      state: present
